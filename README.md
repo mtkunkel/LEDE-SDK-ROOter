@@ -6,7 +6,7 @@ Example target is a WRT3200ACM.   Building from the LEDE development snapshot, a
 
 .config file is pre-generated for the above example, run `make menuconfig` to manually generate .config. 
 In the menu:
-Must [*DE-select*] the following in __Global Build Settings__ prior to ./scripts/feeds/ update -a 
+Must __DE-select__ the following in __Global Build Settings__ prior to ./scripts/feeds/ update -a 
 * all target specific packages by default
 * all kernel module packages by default
 * all userspace packages by default
