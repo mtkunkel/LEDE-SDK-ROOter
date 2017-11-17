@@ -1,2 +1,13 @@
 # LEDE-SDK-ROOter
-Build a LEDE compatible ROOter
+
+Hacked together & hard-coded example to demonstrate how to build a ROOter (from ofmodemsandmen.com) that maintains LEDE kernel compatibility.
+
+Example target is a WRT3200ACM.   Building from the LEDE development snapshot, any LEDE >= 17.01.2 should work.
+
+.config file is pre-generated for the above example, run `make menuconfig` to manually generate .config. 
+In the menu:
+Must [*DE-select*] the following in __Global Build Settings__ prior to ./scripts/feeds/ update -a 
+* all target specific packages by default
+* all kernel module packages by default
+* all userspace packages by default
+Select relevant rooter packages with [M] for module (ext-rooter8).
