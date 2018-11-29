@@ -1,0 +1,48 @@
+diff -Naur rooter/ext-rooter-basic/files/usr/lib/rooter/connect/create_connect.sh rooter-0.1/ext-rooter-basic/files/usr/lib/rooter/connect/create_connect.sh
+--- rooter/ext-rooter-basic/files/usr/lib/rooter/connect/create_connect.sh	2017-10-29 20:37:01.000000000 -0500
++++ rooter-0.1/ext-rooter-basic/files/usr/lib/rooter/connect/create_connect.sh	2018-11-28 22:29:20.069544004 -0600
+@@ -232,6 +232,9 @@
+ 		if [ $idV = 1199 -a $idP = 9051 ]; then
+ 			SIERRAID=1
+ 		fi
++		if [ $idV = 1199 -a $idP = 9091 ]; then
++			SIERRAID=1
++		fi
+ 		if [ $SIERRAID -eq 1 ]; then
+ 			OX=$(grep . /sys/class/tty/ttyUSB*/../../../bInterfaceNumber | grep ":03" | cut -d'/' -f5)
+ 			if [ $BASEP -eq 0 ]; then
+@@ -516,6 +519,9 @@
+ 		if [ $idV = 1199 -a $idP = 9041 ]; then
+ 			NETIFD=1
+ 		fi
++		if [ $idV = 1199 -a $idP = 9091 ]; then
++			NETIFD=1
++		fi
+ 		#if [ $idV = 12d1 -a $idP = 15c1 ]; then
+ 		#	NETIFD=2
+ 		#fi
+diff -Naur rooter/ext-rooter-basic/files/usr/lib/rooter/initialize.sh rooter-0.1/ext-rooter-basic/files/usr/lib/rooter/initialize.sh
+--- rooter/ext-rooter-basic/files/usr/lib/rooter/initialize.sh	2017-10-08 10:54:14.000000000 -0500
++++ rooter-0.1/ext-rooter-basic/files/usr/lib/rooter/initialize.sh	2018-11-28 22:32:10.193465773 -0600
+@@ -280,6 +280,7 @@
+ 	echo "1199 9071" > /sys/bus/usb-serial/drivers/option1/new_id
+ 	echo "1199 9079" > /sys/bus/usb-serial/drivers/option1/new_id
+ 	echo "1199 9041" > /sys/bus/usb-serial/drivers/option1/new_id
++	echo "1199 9091" > /sys/bus/usb-serial/drivers/option1/new_id
+ fi
+ echo "413c 81b6" > /sys/bus/usb-serial/drivers/option1/new_id
+ echo "1e0e 9001" > /sys/bus/usb/drivers/qmi_wwan/new_id
+diff -Naur rooter/rmbim/files/usr/lib/rooter/mbim/connectmbim.sh rooter-0.1/rmbim/files/usr/lib/rooter/mbim/connectmbim.sh
+--- rooter/rmbim/files/usr/lib/rooter/mbim/connectmbim.sh	2017-11-08 19:29:30.000000000 -0600
++++ rooter-0.1/rmbim/files/usr/lib/rooter/mbim/connectmbim.sh	2018-11-28 22:34:25.445423431 -0600
+@@ -170,8 +170,8 @@
+ 	INTER=$(uci get modem.modem$CURRMODEM.interface)
+ 	ifconfig $INTER $IP netmask "255.255.255.255" up
+ 	route add default dev $IP
+-	echo "nameserver $DNS" >> /tmp/resolv.conf.auto
+-	echo "nameserver $DNS2" >> /tmp/resolv.conf.auto
++	#echo "nameserver $DNS" >> /tmp/resolv.conf.auto
++	#echo "nameserver $DNS2" >> /tmp/resolv.conf.auto
+ 
+ 	IDP=$(uci get modem.modem$CURRMODEM.idP)
+ 	IDV=$(uci get modem.modem$CURRMODEM.idV)
